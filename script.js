@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const sidenav = document.querySelector(".side-navbar");
     const sideCloseNav = document.querySelector(".side-navbar__close i");
     const menuToggle = document.querySelector(".navbar__menu-toggle");
+    const body = document.querySelector("body");
 
     if (sideCloseNav && sidenav) {
         sideCloseNav.addEventListener("click", () => {
@@ -10,11 +11,18 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-     if (menuToggle && sidenav) {
+    if (menuToggle && sidenav) {
         menuToggle.addEventListener("click", () => {
             sidenav.classList.add("active"); // Show the navbar
         });
     }
+
+    // Close the sidenav when clicking outside of it
+    body.addEventListener("click", (e) => {
+        if (sidenav.classList.contains("active") && !sidenav.contains(e.target) && !menuToggle.contains(e.target)) {
+            sidenav.classList.remove("active"); // Hide the navbar if clicked outside
+        }
+    });
 
     // New Arrival Carousel Scrolling
     const newArrivalContainer = document.querySelector(".newarrival");
@@ -73,9 +81,3 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
-
-
-
-
-
-
